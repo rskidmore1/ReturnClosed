@@ -103,16 +103,33 @@ for x in json2['records']:
     print 'Try section: print return IMEIs'  
     returnIMEIs1 = returnIMEIs[0]['Incoming_IMEI__c'] #Pulls Return IMEIs string from json 
     #print returnIMEIs1
-    returnIMEIs = returnIMEIs1.split(', ') #Parses string into array 
+    try: 
+      returnIMEIs = returnIMEIs1.split(', ') #Parses string into array
+      print returnIMEIs #Visual check of var 
+    except AttributeError: 
+      pass   
+  
+    try: 
+      returnIMEIs = returnIMEIs1.split('\r\n')
+      print returnIMEIs #Visual check of var
+    except AttributeError:
+      pass 
 
-
-
-
-    print returnIMEIs #Visual check of var
-    if '\r\n' in returnIMEIs1: #If return and newline
-      print 'Return IMEIs contain newline and return'
-      returnIMEIs = returnIMEIs1.split('\r\n') #Splits return IMEI string 
-      print returnIMEIs    
+    '''
+    try: 
+      print returnIMEIs #Visual check of var
+      if type(returnIMEIs1) is None: 
+        print "Return IMEI is type None" 
+      elif '\r\n' in returnIMEIs1: #If return and newline
+        print 'Return IMEIs contain newline and return'
+        returnIMEIs = returnIMEIs1.split('\r\n') #Splits return IMEI string 
+        print returnIMEIs  
+      else:o
+        print 'None' 
+       
+    except AttributeError: 
+      pass
+    '''
   except IndexError: 
     print 'Try section: Not print return IMEIs' #String is empty 
     pass
